@@ -1,0 +1,15 @@
+/* styles/globals.css */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .navbar .logo {
+    margin-bottom: 1rem;
+  }
+  .navbar .nav-links {
+    flex-direction: column;
+  }
+  .navbar .nav-links a {
+    margin-bottom: 1rem;
+  }
+}

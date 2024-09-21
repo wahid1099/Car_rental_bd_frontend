@@ -14,10 +14,10 @@ const baseQuery = fetchBaseQuery({
   baseUrl: "https://car-rental-backend-assingment.vercel.app/api",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState)?.auth?.token; // Access the token from state
+    const token = (getState() as RootState)?.auth?.token; // Accessing the token from state
 
     if (token) {
-      headers.set("Authorization", `Bearer ${token}`); // Set the Authorization header
+      headers.set("Authorization", `Bearer ${token}`); // Setting the Authorization header
     }
     return headers;
   },
@@ -35,7 +35,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   if (result?.error?.status === 401) {
     // Attempt to refresh the token
     const res = await fetch(
-      "https://car-rental-reservation-system-backend-sand.vercel.app/api/auth/refresh-token",
+      "https://car-rental-backend-assingment.vercel.app/api/auth/refresh-token",
       {
         method: "POST",
         credentials: "include",
