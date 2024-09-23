@@ -96,9 +96,9 @@ const AddCarData = () => {
   };
   return (
     <div className="bg-gray-50 min-h-screen p-4">
-      <div className="bg-gradient-to-r from-slate-500 p-6 mb-10 rounded-lg shadow-md">
+      <div className="bg-gradient-to-r from-indigo-500 to-blue-400 p-8 mb-10 rounded-lg shadow-lg">
         <h2 className="text-4xl font-bold text-center text-white">
-          Create New <span className="text-yellow-300">Car</span>
+          Create New <span className="text-indigo-800">Car</span>
         </h2>
       </div>
       <div className="container mx-auto">

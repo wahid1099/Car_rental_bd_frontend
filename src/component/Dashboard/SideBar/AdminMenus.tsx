@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { AiOutlineDown } from "react-icons/ai";
-import { BsFillHouseAddFill } from "react-icons/bs";
-import { MdOutlineManageHistory } from "react-icons/md";
+import {
+  BsFillPersonCheckFill,
+  BsFillPencilFill,
+  BsFillPeopleFill,
+} from "react-icons/bs";
+// import { MdOutlineManageHistory } from "react-icons/md";
 import { FaCar, FaClipboardList } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
@@ -26,8 +30,8 @@ const AdminMenu = () => {
             }`
           }
         >
-          <BsFillHouseAddFill className="w-5 h-5" />
-          <span className="mx-4 font-medium">User Profile</span>
+          <BsFillPersonCheckFill className="w-5 h-5" />
+          <span className="mx-4 font-medium">My Profile</span>
         </NavLink>
       </div>
 
@@ -70,9 +74,9 @@ const AdminMenu = () => {
           onClick={() => toggleDropdown("userManagement")}
           className="flex items-center px-4 py-3 w-full text-left transition-colors duration-300 transform rounded-lg text-gray-200 hover:bg-blue-500 hover:text-white"
         >
-          <MdOutlineManageHistory className="w-5 h-5" />
+          <BsFillPeopleFill className="w-5 h-5" />
           <span className="mx-4 font-medium">User Management</span>
-          <AiOutlineDown
+          <BsFillPeopleFill
             className={`ml-auto transform transition-transform ${
               activeDropdown === "userManagement" ? "rotate-180" : ""
             }`}
@@ -91,7 +95,10 @@ const AdminMenu = () => {
                 }`
               }
             >
-              All Users
+              <div className="flex items-center space-x-2">
+                <BsFillPencilFill />
+                <span className="font-medium">Manage Users</span>
+              </div>
             </NavLink>
           </div>
         )}

@@ -10,6 +10,8 @@ import DashboadLayout from "../layout/DashboardLayout";
 import AddCarData from "../component/Dashboard/Admin/CarManagement/AddCarData";
 import GetAllCarData from "../component/Dashboard/Admin/CarManagement/AllCars";
 import UpdateCar from "../component/Dashboard/Admin/CarManagement/UpdateCarData";
+import AdminViewProfile from "../component/Dashboard/Admin/AdminProfile/AdminProfile";
+import ManageUser from "../component/Dashboard/Admin/UserManagement/ManageUser";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +49,8 @@ export const router = createBrowserRouter([
       </ProtectedRoutes>
     ),
     children: [
+      /* admin Profile Dropdown */
+
       {
         path: "all-cars",
         element: <GetAllCarData />,
@@ -58,6 +62,14 @@ export const router = createBrowserRouter([
       {
         path: "update-car/:id",
         element: <UpdateCar />,
+      },
+      {
+        path: "admin-profile-view",
+        element: <AdminViewProfile />,
+      },
+      {
+        path: "all-users",
+        element: <ManageUser />,
       },
     ],
   },

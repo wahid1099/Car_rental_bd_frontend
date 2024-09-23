@@ -106,7 +106,7 @@ const GetAllCarData = () => {
       items-center 
     "
         >
-          <HashLoader size={100} color="red" />
+          <HashLoader size={100} color="blue" />
         </div>
       </div>
     );
