@@ -3,9 +3,7 @@ import { Button, Space, Table, Tag } from "antd";
 import { carApi } from "../../../../redux/features/Car/CarApi";
 import { toast } from "sonner";
 import { HashLoader } from "react-spinners";
-
 import { TCar } from "../../../../type/global.type";
-
 import UpdateCar from "./UpdateCarData";
 
 const GetAllCarData = () => {
@@ -31,7 +29,7 @@ const GetAllCarData = () => {
     fuelType: item?.fuelType,
   }));
 
-  // delete car
+  // Delete car handler
   const handleDeleteCar = async (id: string) => {
     try {
       await deleteCar(id).unwrap();
@@ -53,8 +51,9 @@ const GetAllCarData = () => {
           style={{
             width: 70,
             height: 70,
-            borderRadius: "100%",
+            borderRadius: "8px",
             objectFit: "cover",
+            border: "2px solid #e5e7eb", // Light border around the image
           }}
         />
       ),
@@ -74,13 +73,7 @@ const GetAllCarData = () => {
       dataIndex: "status",
       key: "status",
       render: (status: string) => (
-        <Tag
-          className={`status ${
-            status === "completed" ? "text-green-500" : "text-red-500"
-          }`}
-        >
-          {status}
-        </Tag>
+        <Tag color={status === "completed" ? "green" : "red"}>{status}</Tag>
       ),
     },
     {
@@ -88,32 +81,28 @@ const GetAllCarData = () => {
       key: "action",
       render: (item: any) => (
         <Space size="middle">
-          <Button onClick={() => handleDeleteCar(item.key)}>Delete</Button>
+          <Button
+            onClick={() => handleDeleteCar(item.key)}
+            className="bg-red-500 text-white hover:bg-red-600 transition duration-300"
+          >
+            Delete
+          </Button>
           <UpdateCar data={item} />
         </Space>
       ),
     },
   ];
+
   if (isFetching)
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div
-          className="
-      h-[70vh]
-      flex 
-      flex-col 
-      justify-center 
-      items-center 
-    "
-        >
-          <HashLoader size={100} color="blue" />
-        </div>
+        <HashLoader size={100} color="blue" />
       </div>
     );
 
   return (
     <div className="bg-gray-50 min-h-screen p-4">
-      <div className="bg-gradient-to-r from-slate-500 p-8 mb-10 rounded-lg shadow-md">
+      <div className="bg-gradient-to-r from-purple-600 to-blue-500 p-8 mb-10 rounded-lg shadow-lg">
         <h2 className="text-4xl font-bold text-center text-white">
           Manage All <span className="text-yellow-300">Cars</span>
         </h2>
@@ -122,7 +111,7 @@ const GetAllCarData = () => {
         columns={columns}
         dataSource={tableData || []}
         pagination={false}
-        className="overflow-x-auto"
+        className="overflow-x-auto bg-white p-4 shadow-md rounded-lg"
       />
     </div>
   );

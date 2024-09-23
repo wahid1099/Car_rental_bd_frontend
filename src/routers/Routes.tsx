@@ -12,6 +12,7 @@ import GetAllCarData from "../component/Dashboard/Admin/CarManagement/AllCars";
 import UpdateCar from "../component/Dashboard/Admin/CarManagement/UpdateCarData";
 import AdminViewProfile from "../component/Dashboard/Admin/AdminProfile/AdminProfile";
 import ManageUser from "../component/Dashboard/Admin/UserManagement/ManageUser";
+import ManageBookings from "../component/Dashboard/Admin/ManageBookings/ManageBookings";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path: "all-users",
         element: <ManageUser />,
+      },
+      {
+        path: "admin-bookings",
+        element: <ManageBookings />,
       },
     ],
   },

@@ -8,7 +8,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { carApi } from "../../../../redux/features/Car/CarApi";
 import { HashLoader } from "react-spinners";
 
-const AdminManageBooking = () => {
+const ManageBookings = () => {
   const { data: allBookings, isLoading } =
     bookingApi.useGetAllBookingsQuery(undefined);
   const allBookingData = allBookings?.data;
@@ -197,36 +197,29 @@ const AdminManageBooking = () => {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen p-4">
-      <div className="bg-gradient-to-r from-slate-500 p-8 mb-10 rounded-lg shadow-md">
+    <div className="bg-gray-100 min-h-screen p-6">
+      {/* Header Section */}
+      <div className="bg-gradient-to-r from-indigo-600 to-blue-500 p-10 mb-10 rounded-xl shadow-lg">
         <h2 className="text-4xl font-bold text-center text-white">
           Manage All <span className="text-yellow-300">User Bookings</span>
         </h2>
       </div>
+
       {/* Show loading spinner while data is loading */}
       {isLoading ? (
-        <div className="flex justify-center items-center h-full">
-          <div
-            className="
-      h-[70vh]
-      flex 
-      flex-col 
-      justify-center 
-      items-center 
-    "
-          >
-            <HashLoader size={100} color="blue" />
-          </div>
+        <div className="flex justify-center items-center min-h-[70vh]">
+          <HashLoader size={80} color="#4A90E2" />
         </div>
       ) : (
         <Table
           columns={columns}
           dataSource={tableData || []}
-          className="overflow-x-auto"
+          pagination={false}
+          className="overflow-x-auto bg-white p-5 shadow-lg rounded-lg"
         />
       )}
     </div>
   );
 };
 
-export default AdminManageBooking;
+export default ManageBookings;
