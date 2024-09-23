@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { BsFillHouseAddFill } from "react-icons/bs";
+
 import { MdOutlineManageHistory } from "react-icons/md";
 import { AiOutlineDown } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
+import { BsFilePerson } from "react-icons/bs";
 
 const UserMenu = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -25,7 +26,7 @@ const UserMenu = () => {
             }`
           }
         >
-          <BsFillHouseAddFill className="w-5 h-5" />
+          <BsFilePerson className="w-5 h-5" />
           <span className="mx-4 font-medium">User Profile</span>
         </NavLink>
       </div>
@@ -48,7 +49,7 @@ const UserMenu = () => {
         {activeDropdown === "manageBookings" && (
           <div className="absolute left-0 mt-2 w-full bg-blue-700 border border-blue-500 rounded shadow-lg z-10">
             <NavLink
-              to="/dashboard/all-bookings"
+              to="/dashboard/my-bookings"
               className={({ isActive }) =>
                 `block px-4 py-3 transition-colors duration-300 transform ${
                   isActive

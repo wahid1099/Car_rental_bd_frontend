@@ -25,6 +25,7 @@ const AddCarData = () => {
     register,
     handleSubmit,
     setValue,
+    reset, // Import reset function
     formState: { errors },
   } = useForm();
 
@@ -82,6 +83,9 @@ const AddCarData = () => {
         confirmButtonText: "OK",
       });
       console.log(response);
+      reset(); // Clear the form after successful submission
+      setSelectOptions([]); // Clear the selected options state for features
+      setSelectVehicleSpecifications([]); // Clear the selected options state for specifications
     } catch (error) {
       Swal.fire({
         title: "Error!",
@@ -378,12 +382,12 @@ const AddCarData = () => {
           <div className="flex justify-center mt-10 col-span-full">
             <button
               type="submit"
-              className={`bg-blue-500 text-white w-full font-bold py-2 px-4 rounded ${
+              className={`bg-blue-800 text-white w-full font-bold py-2 px-4 rounded ${
                 isLoading ? "opacity-50 cursor-not-allowed" : ""
               }`}
               disabled={isLoading}
             >
-              {isLoading ? "Creating..." : "Add Car"}
+              {isLoading ? "Creating..." : "Add New Car"}
             </button>
           </div>
         </form>

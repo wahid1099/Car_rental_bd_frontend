@@ -9,7 +9,7 @@ import {
 import { MultiValue } from "react-select";
 import Select from "react-select";
 import uploadImageToCloudinary from "../../../../utils/uploadImage";
-import { carApi } from "../../../../redux/features/Car/carApi";
+import { carApi } from "../../../../redux/features/Car/CarApi";
 import { toast } from "sonner";
 
 type OptionType = {
@@ -68,8 +68,10 @@ const UpdateCar = ({ data }: any) => {
     const priceValue = Number(pricePerHour);
 
     // Handle image upload separately
-    const imageUploadResult = await uploadImageToCloudinary(carImgUrl);
-
+    let imageUploadResult = data?.carImgUrl; // Default to existing image
+    if (carImgUrl.length > 0) {
+      imageUploadResult = await uploadImageToCloudinary(carImgUrl);
+    }
     // Prepare data for submission
     const updatedData = {
       ...rest,
@@ -78,6 +80,10 @@ const UpdateCar = ({ data }: any) => {
       pricePerHour: priceValue,
       isElectric: isElectric === "true" ? true : false,
       carImgUrl: imageUploadResult,
+      features: selectOptions.map((option) => option.value), // Make sure it's an array of values
+      vehicleSpecification: selectVehicleSpecifications.map(
+        (option) => option.value
+      ),
     };
     try {
       const res = await updateCar({

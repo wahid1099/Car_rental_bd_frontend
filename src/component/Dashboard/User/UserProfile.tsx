@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table, Tag } from "antd";
-import { bookingApi } from "../../../../redux/features/Booking/bookingApi";
+import { bookingApi } from "../../../redux/features/Booking/BookingApi";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
-import { userApi } from "../../../../redux/features/user/userApi";
-import Loader from "../../../../shared/Loader/Loader";
-import { TCarBooking } from "../../../../type/global.type";
-import { GetStatusTag, PaymentStatusTag } from "../../../../utils/getStatusTag";
+import { userApi } from "../../../redux/features/user/userApi";
+import { HashLoader } from "react-spinners";
+import { TCarBooking } from "../../../type/global.type";
+import { GetStatusTag, PaymentStatusTag } from "../../../utils/getStatusTag";
 
 const UserViewProfile = () => {
   // Fetch user data
@@ -102,15 +102,16 @@ const UserViewProfile = () => {
   if (isLoadingUser || isLoadingBookings) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <Loader />
+        <div className="flex justify-center items-center min-h-[70vh]">
+          <HashLoader size={80} color="#4A90E2" />
+        </div>
       </div>
     );
   }
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-100 p-6">
       {/* Header Section */}
-      <div className="bg-gradient-to-r from-slate-400 to-slate-600 p-8 mb-10 rounded-lg shadow-md">
+      <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-10 mb-10 rounded-xl shadow-lg">
         <h2 className="text-4xl font-bold text-center text-white">
           Welcome Back,{" "}
           <span className="text-yellow-300">{userData?.name}</span>!
@@ -121,11 +122,11 @@ const UserViewProfile = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* User Profile Card */}
-          <div className="relative bg-white shadow-lg rounded-lg p-8 transition-transform duration-300 hover:shadow-xl transform hover:-translate-y-1">
+          <div className="relative bg-white shadow-xl rounded-lg p-8 transition-transform duration-300 hover:shadow-2xl transform hover:-translate-y-2">
             <div className="flex justify-center cursor-pointer">
               <Link to="/dashboard/profile-update" className="relative">
                 <img
-                  className="w-36 h-36 object-cover rounded-full border-4 border-white shadow-lg"
+                  className="w-36 h-36 object-cover rounded-full border-4 border-gray-200 shadow-lg"
                   src={userData?.image}
                   alt={userData?.name}
                 />
@@ -136,10 +137,15 @@ const UserViewProfile = () => {
               </Link>
             </div>
             <div className="text-center mt-6">
-              <h2 className="text-3xl font-semibold text-gray-800">
+              <h2 className="text-2xl font-semibold text-gray-800">
                 {userData?.name}
               </h2>
-              <Tag className="mt-2 text-gray-600">{userData?.role}</Tag>
+              <Tag
+                style={{ backgroundColor: "#EBF8FF", color: "#3182CE" }} // Inline styles for bg-blue-100 and text-blue-600
+                className="mt-2"
+              >
+                {userData?.role}
+              </Tag>
             </div>
             <div className="mt-8 text-center text-gray-600">
               <p>
@@ -154,23 +160,23 @@ const UserViewProfile = () => {
           </div>
 
           {/* Total Completed Booking History Card */}
-          <div className="bg-white shadow-lg rounded-lg p-8 transition-transform duration-300 hover:shadow-xl col-span-1 md:col-span-2 transform hover:-translate-y-1">
+          <div className="bg-white shadow-xl rounded-lg p-8 transition-transform duration-300 hover:shadow-2xl col-span-1 md:col-span-2 transform hover:-translate-y-2">
             <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">
               My Completed Booking{" "}
-              <span className="text-yellow-500">Summary</span>
+              <span className="text-purple-600">Summary</span>
             </h2>
-            <div className="bg-gray-100 p-8 rounded-lg text-center">
+            <div className="bg-gray-50 p-6 rounded-lg text-center">
               {totalBooking > 0 ? (
-                <p className="text-xl text-gray-700">
+                <p className="text-lg text-gray-700">
                   You have completed
-                  <span className="text-red-600 font-bold">
+                  <span className="text-blue-600 font-bold">
                     {" "}
                     {totalBooking}{" "}
                   </span>
                   car bookings so far.
                 </p>
               ) : (
-                <p className="text-xl text-gray-700 font-bold">
+                <p className="text-lg text-gray-700 font-bold">
                   You currently have
                   <span className="text-red-600"> no completed bookings</span>.
                   Keep exploring and book a car!
@@ -181,11 +187,13 @@ const UserViewProfile = () => {
         </div>
       </div>
       {/* End Content Section */}
+
       <hr className="mt-10" />
+
       <div>
         <div className="mt-6 mb-6">
           <h2 className="text-4xl font-bold text-center">
-            Completed Booking <span className="text-red-500">History</span>
+            Completed Booking <span className="text-purple-500">History</span>
           </h2>
         </div>
         <hr className="mt-10" />
@@ -195,7 +203,22 @@ const UserViewProfile = () => {
               columns={columns}
               dataSource={tableData || []}
               pagination={false}
-              className="overflow-x-auto"
+              className="overflow-x-auto bg-white p-5 shadow-md rounded-lg"
             />
           ) : (
-            <div className="text-center text
+            <div className="text-center text-blue-700  max-w-4xl p-4 mx-auto mt-10 sm:mt-20 lg:mt-40 rounded-md shadow-lg">
+              <p className="text-lg sm:text-xl font-bold">
+                It looks like you haven't completed any bookings yet.
+              </p>
+              <p className="text-lg sm:text-xl font-bold">
+                Start exploring our cars and make your first booking!
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UserViewProfile;

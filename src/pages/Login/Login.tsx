@@ -27,7 +27,7 @@ const Login = () => {
       });
 
       console.log("Navigating to home...");
-      navigate("/");
+      navigate("/dashboard");
     } catch (error: any) {
       console.error("Login error:", error);
       toast.error(error?.data?.message || "Login failed", {

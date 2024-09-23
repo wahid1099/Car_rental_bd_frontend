@@ -13,6 +13,9 @@ import UpdateCar from "../component/Dashboard/Admin/CarManagement/UpdateCarData"
 import AdminViewProfile from "../component/Dashboard/Admin/AdminProfile/AdminProfile";
 import ManageUser from "../component/Dashboard/Admin/UserManagement/ManageUser";
 import ManageBookings from "../component/Dashboard/Admin/ManageBookings/ManageBookings";
+import UserViewProfile from "../component/Dashboard/User/UserProfile";
+import UpdateProfile from "../component/Dashboard/User/UpdateProfile";
+import MyBookings from "../component/Dashboard/User/MyBookings";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +53,18 @@ export const router = createBrowserRouter([
       </ProtectedRoutes>
     ),
     children: [
+      {
+        path: "profile-view",
+        element: <UserViewProfile />,
+      },
+      {
+        path: "profile-update",
+        element: <UpdateProfile />,
+      },
+      {
+        path: "my-bookings",
+        element: <MyBookings />,
+      },
       /* admin Profile Dropdown */
 
       {

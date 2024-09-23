@@ -6,13 +6,13 @@ import { toast } from "sonner";
 import { RxCross2 } from "react-icons/rx";
 import { FaEdit } from "react-icons/fa";
 import { userApi } from "../../../redux/features/user/userApi";
-// import uploadImage from "../../utils/uploadImage";
 
-const Profile = () => {
+const UpdateProfile = () => {
   const { register, handleSubmit } = useForm();
   const { data: user } = authApi.useGetMeQuery(undefined);
   const [edit, setEdit] = useState(false);
   const [updateUser] = userApi.useUpdateUserMutation();
+
   const handleEditIcon = () => {
     setEdit(!edit);
   };
@@ -33,126 +33,121 @@ const Profile = () => {
         setEdit(!edit);
       }
     } catch (error) {
-      if (error) {
-        toast.error("Something went wrong");
-      }
+      console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
   return (
-    <div>
-      <div className=" mb-5 pb-5 border-b-2 border-dashed flex items-center justify-between">
-        <h1 className="capitalize font-semibold text-3xl">
-          Updat <span className="text-red-600">Profile</span>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      {/* Header Section */}
+      <div className="mb-6 pb-4 border-b-2 border-dashed flex items-center justify-between">
+        <h1 className="capitalize font-bold text-3xl text-gray-800">
+          Update <span className="text-red-600">Profile</span>
         </h1>
         <div onClick={handleEditIcon} className="cursor-pointer">
           {edit ? (
-            <RxCross2 className="w-6 h-6 text-accent"></RxCross2>
+            <RxCross2 className="w-6 h-6 text-red-500 hover:text-red-700 transition" />
           ) : (
-            <FaEdit className="w-6 h-6 text-accent"></FaEdit>
+            <FaEdit className="w-6 h-6 text-blue-500 hover:text-blue-700 transition" />
           )}
         </div>
       </div>
 
-      <div className="p-6 max-w-6xl mx-auto rounded shadow-md">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-5">
-            <div className="w-full md:w-1/2">
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text text-lg font-semibold">Name</span>
-                </div>
+      {/* Form Section */}
+      <div className="p-8 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Name Field */}
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">
+                Name
                 <input
                   {...register("name")}
                   type="text"
-                  className="input w-full  focus:outline-none text-lg border border-gray-700  rounded px-4 py-2"
+                  className="input w-full mt-2 border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none rounded px-4 py-2 text-gray-800"
                   defaultValue={user?.data?.name}
-                  disabled={edit ? false : true}
+                  disabled={!edit}
                 />
               </label>
             </div>
-            <div className="w-full md:w-1/2">
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text text-lg font-semibold">
-                    Email
-                  </span>
-                </div>
+
+            {/* Email Field */}
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">
+                Email
                 <input
                   type="text"
                   defaultValue={user?.data?.email}
-                  className="input w-full focus:outline-none text-lg border border-gray-700 rounded px-4 py-2 hover:cursor-not-allowed"
+                  className="input w-full mt-2 border border-gray-300 bg-gray-100 cursor-not-allowed rounded px-4 py-2 text-gray-800"
                   readOnly
                 />
               </label>
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row items-center justify-between gap-5 mt-4">
-            <div className="w-full md:w-1/2">
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text text-lg font-semibold">
-                    Phone Number
-                  </span>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Phone Field */}
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">
+                Phone Number
                 <input
                   type="text"
+                  className="input w-full mt-2 border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none rounded px-4 py-2 text-gray-800"
                   defaultValue={user?.data?.phone}
-                  className="input w-full focus:outline-none text-lg border border-gray-700 rounded px-4 py-2 "
-                  disabled={edit ? false : true}
+                  disabled={!edit}
                   {...register("phone", {
                     pattern: {
                       value: /^[0-9]+$/,
-                      message: "Only number required",
+                      message: "Only numbers are allowed",
                     },
                     minLength: {
                       value: 11,
-                      message: "11 digit number need",
+                      message: "Must be an 11-digit number",
                     },
                   })}
                 />
               </label>
             </div>
-            <div className="w-full md:w-1/2">
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text text-lg font-semibold">
-                    Address
-                  </span>
-                </div>
+
+            {/* Address Field */}
+            <div>
+              <label className="block text-lg font-semibold text-gray-700">
+                Address
                 <input
                   type="text"
-                  placeholder="street, city, state"
+                  placeholder="Street, City, State"
                   defaultValue={user?.data?.address}
-                  className="input w-full focus:outline-none text-lg border border-gray-700 rounded px-4 py-2 "
-                  disabled={edit ? false : true}
+                  className="input w-full mt-2 border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 focus:outline-none rounded px-4 py-2 text-gray-800"
+                  disabled={!edit}
                   {...register("address")}
                 />
               </label>
             </div>
           </div>
 
-          <div className="mt-5">
-            <label className="form-control w-full">
-              <div className="label">
-                <span className="label-text text-lg font-semibold">Image</span>
-              </div>
+          {/* Image Upload Field */}
+          <div>
+            <label className="block text-lg font-semibold text-gray-700">
+              Image
               <input
                 {...register("image")}
                 type="file"
-                className="file-input file-input-bordered w-full  border border-gray-700 rounded px-4 py-2"
-                disabled={edit ? false : true}
+                className="file-input file-input-bordered w-full mt-2 border border-gray-300 focus:outline-none rounded px-4 py-2 text-gray-800"
+                disabled={!edit}
               />
             </label>
           </div>
 
-          <div className="mt-5">
+          {/* Submit Button */}
+          <div>
             <input
               type="submit"
               value="Update"
-              className="file-input file-input-bordered w-full font-bold rounded px-4 py-2 cursor-pointer disabled:cursor-not-allowed bg-red-400 hover:bg-red-600 transition-all duration-300"
-              disabled={edit ? false : true}
+              className={`w-full py-3 px-6 rounded text-white font-semibold transition ${
+                edit ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-300"
+              } cursor-pointer ${edit ? "" : "cursor-not-allowed"}`}
+              disabled={!edit}
             />
           </div>
         </form>
@@ -161,4 +156,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UpdateProfile;

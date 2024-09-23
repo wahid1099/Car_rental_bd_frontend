@@ -190,11 +190,12 @@ const MyBookings = () => {
 
   return (
     <div className="p-4 md:p-8">
-      <div className="bg-slate-300 p-4 mb-10 rounded-lg shadow-md">
-        <h2 className="text-2xl md:text-4xl font-serif font-bold text-center text-black mb-4 md:mb-8">
-          Total Bookings <span className="text-red-600">List</span>
+      <div className="bg-white p-6 mb-12 rounded-xl shadow-lg border border-gray-200">
+        <h2 className="text-3xl md:text-5xl font-serif font-extrabold text-center text-gray-800 mb-6 md:mb-10">
+          Total Bookings <span className="text-blue-600">List</span>
         </h2>
       </div>
+
       {isLoading || isFetching ? (
         <div className="flex justify-center items-center min-h-[70vh]">
           <HashLoader size={80} color="#4A90E2" />
