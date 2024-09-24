@@ -16,6 +16,9 @@ import ManageBookings from "../component/Dashboard/Admin/ManageBookings/ManageBo
 import UserViewProfile from "../component/Dashboard/User/UserProfile";
 import UpdateProfile from "../component/Dashboard/User/UpdateProfile";
 import MyBookings from "../component/Dashboard/User/MyBookings";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import CarList from "../pages/CarList/CarList";
+import CarViewDetails from "../pages/CarDetails/CarDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +32,14 @@ export const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "car",
+        element: <CarList />,
+      },
+      {
+        path: "/view-details/:id",
+        element: <CarViewDetails />,
       },
 
       {
@@ -92,5 +103,10 @@ export const router = createBrowserRouter([
         element: <ManageBookings />,
       },
     ],
+  },
+
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);

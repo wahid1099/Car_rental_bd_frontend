@@ -2,7 +2,7 @@
 import { Button, Space, Table, Tag } from "antd";
 import { carApi } from "../../../../redux/features/Car/CarApi";
 import { toast } from "sonner";
-import { HashLoader } from "react-spinners";
+import { GridLoader } from "react-spinners";
 import { TCar } from "../../../../type/global.type";
 import UpdateCar from "./UpdateCarData";
 
@@ -96,7 +96,7 @@ const GetAllCarData = () => {
   if (isFetching)
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <HashLoader size={100} color="blue" />
+        <GridLoader size={100} color="blue" />
       </div>
     );
 
