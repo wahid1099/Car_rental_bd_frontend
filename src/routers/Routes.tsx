@@ -19,6 +19,7 @@ import MyBookings from "../component/Dashboard/User/MyBookings";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import CarList from "../pages/CarList/CarList";
 import CarViewDetails from "../pages/CarDetails/CarDetailsPage";
+import CarBooking from "../pages/CarbookingPage/CarBookingPage";
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +42,10 @@ export const router = createBrowserRouter([
         path: "/view-details/:id",
         element: <CarViewDetails />,
       },
-
+      {
+        path: "booking",
+        element: <CarBooking />,
+      },
       {
         path: "/contact-us",
         element: <ContactUs />,
