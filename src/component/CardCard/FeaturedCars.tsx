@@ -64,7 +64,7 @@ const FeaturedCars = () => {
     <div>
       <div className="text-center py-16">
         <h2 className="text-3xl md:text-4xl font-semibold mb-4">
-          Recommended <span className="text-red-500">Cars</span>
+          Our Best <span className="text-red-500">Cars</span>
         </h2>
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
           <p className="text-gray-600 max-w-2xl mx-auto text-center md:text-left">

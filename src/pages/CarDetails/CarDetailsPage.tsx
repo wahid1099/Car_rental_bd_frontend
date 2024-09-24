@@ -14,21 +14,6 @@ const CarViewDetails = () => {
 
   return (
     <div>
-      {/* <div className="relative h-[300px] md:h-[500px] w-full">
-        <div
-          style={{
-            backgroundImage:
-              "url('https://i.postimg.cc/zBBwKh8p/car-details.jpg')",
-            backgroundAttachment: "fixed",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          className="absolute inset-0"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-70"></div>
-        </div>
-      </div> */}
-
       {isFetching ? (
         <div className="flex justify-center items-center ">
           <BounceLoader size={100} color="pink" />

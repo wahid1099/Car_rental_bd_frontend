@@ -9,7 +9,7 @@ import { FaEdit } from "react-icons/fa";
 import { TCar } from "../../../../type/global.type";
 import { HashLoader } from "react-spinners";
 import { FaCar, FaCaretLeft, FaUsers } from "react-icons/fa6";
-
+import avatar from "../../../../assets/images.jpeg";
 const AdminViewProfile = () => {
   // Fetch all cars
   const { data: allCars, isLoading: isLoadingCars } = carApi.useGetAllCarsQuery(
@@ -137,9 +137,10 @@ const AdminViewProfile = () => {
               <Link to="/dashboard/profile-update" className="relative">
                 <img
                   className="w-36 h-36 object-cover rounded-full border-4 border-indigo-500 shadow-md"
-                  src={userData?.image}
-                  alt={userData?.name}
+                  src={userData?.image || avatar} // Replace with your custom image path
+                  alt={userData?.name || "User Avatar"} // Fallback alt text
                 />
+
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 transition-opacity duration-300 hover:opacity-100 rounded-full">
                   <FaEdit className="text-2xl text-white" />
                 </div>

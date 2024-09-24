@@ -95,7 +95,7 @@ const CarInformation: React.FC<CarInformationProps> = ({ carDetails }) => {
                   .slice(0, 5)
                   .map((spec, index) => (
                     <div key={index} className="flex items-center">
-                      <i className="text-red-500 mr-2">
+                      <i className="text-blue-500 mr-2">
                         {index === 0 && <FaCogs />}
                         {index === 1 && <FaTachometerAlt />}
                         {index === 2 && <FaHorse />}
@@ -119,7 +119,7 @@ const CarInformation: React.FC<CarInformationProps> = ({ carDetails }) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {carDetails.features.slice(0, 5).map((feature, index) => (
                   <div key={index} className="flex items-center">
-                    <i className="text-red-500 mr-2">
+                    <i className="text-blue-500 mr-2">
                       {index === 0 && <FaCogs />}
                       {index === 1 && <FaTachometerAlt />}
                       {index === 2 && <FaHorse />}
@@ -144,7 +144,7 @@ const CarInformation: React.FC<CarInformationProps> = ({ carDetails }) => {
 
           <TabPanel>
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Leave a <span className="text-red-600">Comment</span>
+              Leave a <span className="text-blue-600">Comment</span>
             </h2>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -177,7 +177,7 @@ const CarInformation: React.FC<CarInformationProps> = ({ carDetails }) => {
 
               <button
                 type="submit"
-                className={`bg-red-500 text-white px-4 py-2 hover:bg-red-600 transition rounded-md mt-4 ${
+                className={`bg-blue-900 text-white px-4 py-2 hover:bg-blue-600 transition rounded-md mt-4 ${
                   loading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={loading}

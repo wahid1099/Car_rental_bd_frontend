@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { GrLogout } from "react-icons/gr";
 import { useAppDispatch } from "../../../redux/hooks";
 import { logOut } from "../../../redux/features/Auth/AuthSlice";
+import avatar from "../../../assets/images.jpeg";
 
 import Avatar from "./Avatar";
 import UserMenu from "./UserMenu";
@@ -70,8 +71,8 @@ const SideBar = () => {
             <Link to="/">
               <img
                 className="object-cover w-24 h-24 mx-2 rounded-full border-4 border-blue-500"
-                src={user?.image}
-                alt="avatar"
+                src={user?.image || avatar} // Replace with your custom image path
+                alt={user?.name || "User Avatar"} // Fallback alt text
                 referrerPolicy="no-referrer"
               />
             </Link>
