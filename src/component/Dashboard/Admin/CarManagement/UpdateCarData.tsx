@@ -68,6 +68,15 @@ const UpdateCar = ({ data }: any) => {
     if (carImgUrl.length > 0) {
       imageUploadResult = await uploadImageToCloudinary(carImgUrl);
     }
+
+    if (selectOptions.length === 0) {
+      alert("At least one car feature must be selected");
+      return;
+    }
+    if (selectVehicleSpecifications.length === 0) {
+      alert("At least one vehicle specification must be selected");
+      return;
+    }
     // Prepare data for submission
     const updatedData = {
       ...rest,
@@ -187,6 +196,7 @@ const UpdateCar = ({ data }: any) => {
                   id="carImgUrl"
                   className="mt-1 p-2 border border-gray-300 rounded w-full"
                   {...register("carImgUrl")}
+                  required
                 />
               </div>
 
