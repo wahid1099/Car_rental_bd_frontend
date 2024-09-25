@@ -27,7 +27,8 @@ const ManageUser = () => {
 
   // delete user with SweetAlert confirmation
   const handleDeleteUser = async (id: string) => {
-    Swal.fire({
+    console.log("id", id);
+    const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
@@ -35,18 +36,22 @@ const ManageUser = () => {
       confirmButtonText: "Yes, delete it!",
       cancelButtonText: "No, cancel!",
       reverseButtons: true,
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          await deleteUser(id).unwrap();
-          toast.success("User Deleted Successfully");
-        } catch (error: any) {
-          toast.error(error.message);
-        }
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        toast.info("Delete action cancelled");
-      }
     });
+
+    if (result.isConfirmed) {
+      try {
+        await deleteUser(id).unwrap(); // Assuming `deleteUser` is a Redux Toolkit function or a similar async function.
+        toast.success("User Deleted Successfully");
+      } catch (error: any) {
+        const errorMessage =
+          error?.response?.data?.message ||
+          error?.message ||
+          "An error occurred!";
+        toast.error(errorMessage);
+      }
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      toast.info("Delete action cancelled");
+    }
   };
 
   // update role with SweetAlert confirmation
