@@ -7,6 +7,8 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { bookingApi } from "../../redux/features/Booking/BookingApi";
 import { toast } from "sonner";
 import { TCar } from "../../type/global.type";
+import DatePicker from "react-datepicker";
+import moment from "moment";
 
 const BookingFormModal = ({ car }: { car: TCar }) => {
   const [card, setCard] = useState(true);
@@ -14,18 +16,24 @@ const BookingFormModal = ({ car }: { car: TCar }) => {
   const { user, token } = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
-
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [startTime, setStartTime] = useState<string>("");
   const [open, setOpen] = useState(false);
 
   //submit data
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const formattedDate = moment(selectedDate).format("YYYY-MM-DD"); // Use moment to format the date
+
     const bookingData = {
       identity: data?.identity,
       identityNo: data?.identityNo,
       drivingLicenseNo: data?.drivingLicenseNo,
       user: user?._id,
-      car: car?._id,
+      carId: car?._id,
+      date: formattedDate, // Add the selected date in ISO format
+      startTime: startTime, // Add start time
     };
+    console.log(bookingData);
     try {
       const res = await createBooking(bookingData).unwrap();
       if (res.success) {
@@ -113,6 +121,39 @@ const BookingFormModal = ({ car }: { car: TCar }) => {
                     {...register("drivingLicenseNo", { required: true })}
                   />
                 </div>
+
+                {/* Add Date Picker */}
+                <div>
+                  <label className="block text-sm font-semibold mb-2">
+                    Select Date
+                  </label>
+                  {/* <DatePicker
+                    selected={selectedDate}
+                    onChange={(date: Date | null) => setSelectedDate(date)} // Allow both Date and null
+                    className="w-full px-4 py-2 border rounded-md"
+                    placeholderText="Select Date"
+                  /> */}
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={(date: Date | null) => setSelectedDate(date)}
+                    className="w-full px-4 py-2 border rounded-md"
+                    placeholderText="Select Date"
+                    dateFormat="yyyy-MM-dd" // Display date in YYYY-MM-DD format in the input field
+                  />
+                </div>
+
+                {/* Add Start Time */}
+                <div>
+                  <label className="block text-sm font-semibold mb-2">
+                    Start Time
+                  </label>
+                  <input
+                    type="time"
+                    className="w-full px-4 py-2 border rounded-md"
+                    onChange={(e) => setStartTime(e.target.value)}
+                  />
+                </div>
+
                 {/* payment section */}
                 <section className="lg:col-span-2 flex flex-col">
                   <div className="h-full  ">

@@ -19,19 +19,13 @@ const CarBooking = () => {
   const [carType, setCarType] = useState("");
   const [features, setFeatures] = useState("");
   const [seats, setSeats] = useState("");
-  const [searchParams, setSearchParams] = useState<SearchParams>({
-    carType,
-    features,
-    seats,
-  });
+  const [searchParams, setSearchParams] = useState<SearchParams>({});
 
-  const { data: carSearch, isLoading } = carApi.useSearchCarsForBookingQuery(
-    searchParams,
-    {
-      skip: !Object.values(searchParams).some((param) => param),
-    }
-  );
+  // Fetch data using the search parameters
+  const { data: carSearch, isLoading } =
+    carApi.useSearchCarsForBookingQuery(searchParams);
 
+  // handle debounced search
   const handleSearchCar = useCallback(
     debounce((value: SearchParams) => {
       setSearchParams(value);
@@ -39,10 +33,9 @@ const CarBooking = () => {
     []
   );
 
-  // handle for the select fields
+  // Update search parameters when filters change
   const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newType = e.target.value;
-
     setCarType(newType);
     handleSearchCar({ ...searchParams, carType: newType });
   };
