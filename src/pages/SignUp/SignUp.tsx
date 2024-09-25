@@ -46,7 +46,7 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Hero Section */}
-      <div className="relative h-[400px] md:h-[400px] w-full">
+      {/* <div className="relative h-[400px] md:h-[400px] w-full">
         <div
           style={{
             backgroundImage:
@@ -59,7 +59,7 @@ const Register = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-70"></div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Form Section */}
       <div className="bg-white py-10">

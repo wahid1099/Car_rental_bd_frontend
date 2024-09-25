@@ -63,10 +63,6 @@ const UpdateCar = ({ data }: any) => {
     const { rating, maxSeats, pricePerHour, carImgUrl, isElectric, ...rest } =
       cdata;
 
-    const ratingValue = Number(rating);
-    const seatsValue = Number(maxSeats);
-    const priceValue = Number(pricePerHour);
-
     // Handle image upload separately
     let imageUploadResult = data?.carImgUrl; // Default to existing image
     if (carImgUrl.length > 0) {
@@ -75,12 +71,12 @@ const UpdateCar = ({ data }: any) => {
     // Prepare data for submission
     const updatedData = {
       ...rest,
-      rating: ratingValue,
-      maxSeats: seatsValue,
-      pricePerHour: priceValue,
+      rating: rating ? Number(rating) : data?.rating, // Use existing if empty
+      maxSeats: maxSeats ? Number(maxSeats) : data?.maxSeats, // Use existing if empty
+      pricePerHour: pricePerHour ? Number(pricePerHour) : data?.pricePerHour, // Use existing if empty
       isElectric: isElectric === "true" ? true : false,
       carImgUrl: imageUploadResult,
-      features: selectOptions.map((option) => option.value), // Make sure it's an array of values
+      features: selectOptions.map((option) => option.value),
       vehicleSpecification: selectVehicleSpecifications.map(
         (option) => option.value
       ),
