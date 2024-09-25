@@ -24,8 +24,9 @@ const BookingFormModal = ({ car }: { car: TCar }) => {
       identityNo: data?.identityNo,
       drivingLicenseNo: data?.drivingLicenseNo,
       user: user?._id,
-      car: car?._id,
+      carId: car?._id,
     };
+    console.log(bookingData);
     try {
       const res = await createBooking(bookingData).unwrap();
       if (res.success) {

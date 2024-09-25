@@ -14,7 +14,7 @@ const ManageUser = () => {
   const userData = allUser?.data;
 
   const [updateRole] = userManagementApi.useMakeAdminMutation();
-  const [deleteUser] = userApi.useDeleteUserMutation();
+  const [deleteUserData] = userApi.useDeleteUserDataMutation();
 
   const tableData = userData?.map((item: TUser) => ({
     key: item._id,
@@ -28,6 +28,7 @@ const ManageUser = () => {
   // delete user with SweetAlert confirmation
   const handleDeleteUser = async (id: string) => {
     console.log("id", id);
+
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -40,7 +41,7 @@ const ManageUser = () => {
 
     if (result.isConfirmed) {
       try {
-        await deleteUser(id).unwrap(); // Assuming `deleteUser` is a Redux Toolkit function or a similar async function.
+        await deleteUserData(id).unwrap(); // Assuming `deleteUser` is a Redux Toolkit function or a similar async function.
         toast.success("User Deleted Successfully");
       } catch (error: any) {
         const errorMessage =
@@ -128,7 +129,7 @@ const ManageUser = () => {
             disabled={item.status === "Blocked"}
             className="hover:bg-red-500"
           >
-            Delete
+            Block User
           </Button>
         </Space>
       ),
