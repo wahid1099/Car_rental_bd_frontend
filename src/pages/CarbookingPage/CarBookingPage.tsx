@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FaCar, FaCogs, FaChair } from "react-icons/fa";
 import { carApi } from "../../redux/features/Car/CarApi";
 import CarCard from "../../component/CardCard/CarCard";
-import { ClimbingBoxLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 import { debounce } from "lodash";
 import { TCar } from "../../type/global.type";
 
@@ -62,7 +62,8 @@ const CarBooking = () => {
       <div className="relative h-[300px] md:h-[500px] w-full">
         <div
           style={{
-            backgroundImage: "url('https://i.ibb.co/T8Wy3z9/bookings.jpg')",
+            backgroundImage:
+              "url('https://media.licdn.com/dms/image/v2/D4D12AQEaWLtEuUU4fA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1673788280118?e=2147483647&v=beta&t=AK5qqSCFdPZStxfLqYODXhWT5wm-2TFxDaQnur-Jrpw')",
             backgroundAttachment: "fixed",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -140,11 +141,11 @@ const CarBooking = () => {
       {/* Car Cards or No Cars Message */}
       <div className="container mx-auto mt-20">
         {isLoading ? (
-          <div className="col-span-full flex justify-center">
-            <ClimbingBoxLoader size="100" />
+          <div className="flex justify-center">
+            <ClipLoader size="100" color="red" />
           </div>
         ) : noCarsMessage ? (
-          <div className="text-center text-2xl font-semibold text-red-500 max-w-3xl mx-auto bg-slate-300 rounded-md p-4">
+          <div className="text-center text-2xl font-semibold text-black-500 max-w-3xl mx-auto bg-slate-300 rounded-md p-4">
             {noCarsMessage}
           </div>
         ) : (

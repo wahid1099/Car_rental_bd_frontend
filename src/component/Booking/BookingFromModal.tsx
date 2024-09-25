@@ -40,6 +40,7 @@ const BookingFormModal = ({ car }: { car: TCar }) => {
         toast.success("Car Booked Successfully", { position: "top-center" });
         reset();
         setOpen(false);
+        navigate("/booking-confirmation", { state: { bookingData } });
       } else {
         toast.error(res.message, { position: "top-center" });
       }
@@ -74,7 +75,7 @@ const BookingFormModal = ({ car }: { car: TCar }) => {
           <div className=" mx-auto ">
             <div className="bg-white p-3 rounded-lg shadow-md">
               <div className="flex mb-6 border-b-2 border-gray-200 ">
-                <div className="text-red-500 items-center font-semibold py-2 px-4 border-b-2 border-blue-500">
+                <div className="text-red-700 items-center font-semibold py-2 px-4 border-b-2 border-blue-500">
                   Booking Form
                 </div>
               </div>
@@ -292,7 +293,7 @@ const BookingFormModal = ({ car }: { car: TCar }) => {
                                   Mobile Banking(Bkash/Nogod/Rocket)
                                 </label>
                                 <input
-                                  className="mt-1 bg-white border text-gray-900 text-sm rounded block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white shadow-lg"
+                                  className="mt-1 bg-white border text-black text-sm rounded block w-full p-2.5 dark:bg-gray-100 dark:border-gray-100 dark:placeholder-gray-100 dark:text-black shadow-lg"
                                   {...register("mobileBanking", {
                                     required: true,
                                   })}
@@ -327,7 +328,7 @@ const BookingFormModal = ({ car }: { car: TCar }) => {
 
                 {/* Booking Button */}
                 <div className="md:col-span-2 mt-4">
-                  <button className="border-2 border-red-600 px-4 w-full py-1 text-red-600 hover:bg-black hover:text-white transition mb-2 md:mb-0">
+                  <button className="border-2 bg-blue-600 px-4 w-full py-1 text-white hover:bg-blue-800 hover:text-white transition mb-2 md:mb-0">
                     Submit
                   </button>
                 </div>

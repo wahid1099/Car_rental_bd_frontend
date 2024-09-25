@@ -60,7 +60,15 @@ const Navbar = () => {
               onClick={toggleUserMenu}
               className="flex items-center text-gray-700 focus:outline-none"
             >
-              <FaUserCircle size={24} />
+              {user?.image ? (
+                <img
+                  src={user.image}
+                  alt="User"
+                  className="h-8 w-8 rounded-full"
+                />
+              ) : (
+                <FaUserCircle size={24} />
+              )}
             </button>
 
             {/* User Menu */}
