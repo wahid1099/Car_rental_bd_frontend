@@ -1,5 +1,5 @@
 // components/Navbar.js
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userApi } from "../../redux/features/user/userApi";
 import { useAppSelector } from "../../redux/hooks";
 import { useCurrentToken } from "../../redux/features/Auth/AuthSlice";
@@ -7,6 +7,9 @@ import { FaUserCircle } from "react-icons/fa";
 // import { useSelector } from "react-redux";
 import { BiSolidUserPlus } from "react-icons/bi";
 import { BiLogIn } from "react-icons/bi";
+import { logOut } from "../../redux/features/Auth/AuthSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { FiLogOut } from "react-icons/fi";
 
 // src/components/Navbar.jsx
 import { useState } from "react";
@@ -17,9 +20,16 @@ const Navbar = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   //const isLoggedIn = useSelector((state) => state.user.isLoggedIn); // Assume you manage the user's login state in Redux
   const token = useAppSelector(useCurrentToken);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { data: getMe } = userApi.useGetMeQuery(undefined, { skip: !token });
   const user = getMe?.data;
+
+  const handleLogOut = () => {
+    dispatch(logOut());
+    navigate("/");
+  };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
@@ -96,13 +106,23 @@ const Navbar = () => {
                     </Link>
                   </>
                 ) : (
-                  <Link
-                    to="/dashboard"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setIsUserMenuOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
+                  <>
+                    <Link
+                      to="/dashboard"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setIsUserMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+
+                    <button
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center"
+                      onClick={handleLogOut}
+                    >
+                      <FiLogOut className="mr-2" />
+                      Log Out
+                    </button>
+                  </>
                 )}
               </div>
             )}
